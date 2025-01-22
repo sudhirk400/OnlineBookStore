@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sudhirk400.bookstore.model.Book;
 import com.sudhirk400.bookstore.service.BookService;
 
+import jakarta.annotation.security.RolesAllowed;
+
 /**
  * 
  */
@@ -38,21 +40,26 @@ public class BookController {
 	}
 
 	@GetMapping("/{id}")
+	//@RolesAllowed({"Admin","Customer"})
+	@RolesAllowed("Customer")
 	public Book getBookById(@PathVariable Long id) {
 		return bookService.getBookById(id);
 	}
 
 	@PostMapping
+	@RolesAllowed("Admin")
 	public Book createBook(@RequestBody Book book) {
 		return bookService.createBook(book);
 	}
 
 	@PutMapping("/{id}")
+	@RolesAllowed("Admin")
 	public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
 		return bookService.updateBook(id, book);
 	}
 
 	@DeleteMapping("/{id}")
+	@RolesAllowed("Admin")
 	public void deleteBook(@PathVariable Long id) {
 		bookService.deleteBook(id);
 	}
