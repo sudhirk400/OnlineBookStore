@@ -9,7 +9,7 @@ Run below on sql command line or use pgAdmin
 
 create database keycloak_db;
 create user keycloak_user with password 'keycloak123';
-grant all privileges on database keycloak_db to keycloak_user;
+grant all privileges on database keycloak_db to keycloak_user; 
 ALTER ROLE keycloak_user
 	SUPERUSER
 	CREATEDB
