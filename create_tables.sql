@@ -1,4 +1,4 @@
-CREATE TABLE Books (
+CREATE TABLE Book (
     bookID INT PRIMARY KEY,
     AuthorID INT,
     PublisherID INT,
@@ -11,26 +11,26 @@ CREATE TABLE Books (
     Condition TEXT
 );
 
-CREATE TABLE Publishers (
+CREATE TABLE Publisher (
     publisherID INT PRIMARY KEY,
     Country TEXT,
-    bookID INT REFERENCES Books(bookID)
+    bookID INT REFERENCES Book(bookID)
 );
 
-CREATE TABLE Authors (
+CREATE TABLE Author (
     AuthorID INT PRIMARY KEY,
     firstName TEXT,
     lastName TEXT,
-    bookID INT REFERENCES Books(bookID)
+    bookID INT REFERENCES Book(bookID)
 );
 
 CREATE TABLE Inventory (
-    bookID INT PRIMARY KEY REFERENCES Books(bookID),
+    bookID INT PRIMARY KEY REFERENCES Book(bookID),
     stockLevelUsed INT,
     stockLevelNew INT
 );
 
-CREATE TABLE Customers (
+CREATE TABLE Customer (
     customerID INT PRIMARY KEY,
     firstName TEXT,
     lastName TEXT,
@@ -42,9 +42,9 @@ CREATE TABLE Customers (
     phoneNumber TEXT
 );
 
-CREATE TABLE Orders (
+CREATE TABLE Order (
     orderID INT PRIMARY KEY,
-    customerID INT REFERENCES Customers(customerID),
+    customerID INT REFERENCES Customer(customerID),
     orderDate DATE,
     Subtotal NUMERIC(10, 2),
     Shipping NUMERIC(10, 2),
@@ -53,10 +53,8 @@ CREATE TABLE Orders (
 
 CREATE TABLE OrderItem (
     OrderID INT,
-    bookID INT REFERENCES Books(bookID),
+    bookID INT REFERENCES Book(bookID),
     Quantity INT,
     Price NUMERIC(10, 2),
     PRIMARY KEY (OrderID, bookID)
 );
-
-
