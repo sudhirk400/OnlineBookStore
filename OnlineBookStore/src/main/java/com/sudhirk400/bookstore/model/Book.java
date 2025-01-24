@@ -2,6 +2,8 @@ package com.sudhirk400.bookstore.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +35,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "AuthorID", referencedColumnName = "AuthorID")
+    @JsonIgnore
     private Author author;
 
     @Column(name = "PublisherID", nullable = false, insertable = false, updatable = false)
@@ -40,6 +43,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "PublisherID", referencedColumnName = "publisherID")
+    @JsonIgnore
     private Publisher publisher;
 
     @Column(name = "Title", nullable = false)

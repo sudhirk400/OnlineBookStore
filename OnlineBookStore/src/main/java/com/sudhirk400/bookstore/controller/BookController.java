@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sudhirk400.bookstore.dto.BookRecord;
 import com.sudhirk400.bookstore.model.Book;
 import com.sudhirk400.bookstore.service.BookService;
 
@@ -45,7 +46,7 @@ public class BookController {
 	@GetMapping("/{id}")
 	@RolesAllowed({"Admin","Customer"})
 	//@RolesAllowed("Customer")
-	public Book getBookById(@PathVariable Integer id) {
+	public BookRecord getBookById(@PathVariable Integer id) {
 		return bookService.getBookById(id);
 	}
 

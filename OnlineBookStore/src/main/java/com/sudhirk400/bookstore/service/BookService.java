@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sudhirk400.bookstore.dto.BookRecord;
 import com.sudhirk400.bookstore.model.Book;
 import com.sudhirk400.bookstore.repository.BookRepository;
 
@@ -21,8 +22,10 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBookById(Integer id) {
-        return bookRepository.findById(id).orElse(null);
+    public BookRecord getBookById(Integer id) {
+    	Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+    	return new BookRecord(book);
+    	//return bookRepository.findById(id).orElse(null);
     }
 
     public Book saveBook(Book book) {
