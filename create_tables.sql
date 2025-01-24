@@ -42,7 +42,7 @@ CREATE TABLE Customer (
     phoneNumber TEXT
 );
 
-CREATE TABLE Order (
+CREATE TABLE Orders (
     orderID INT PRIMARY KEY,
     customerID INT REFERENCES Customer(customerID),
     orderDate DATE,
@@ -52,9 +52,9 @@ CREATE TABLE Order (
 );
 
 CREATE TABLE OrderItem (
-    OrderID INT,
+    orderID INT,
     bookID INT REFERENCES Book(bookID),
     Quantity INT,
     Price NUMERIC(10, 2),
-    PRIMARY KEY (OrderID, bookID)
+    PRIMARY KEY (orderID, bookID)
 );
