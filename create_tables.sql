@@ -50,5 +50,13 @@ CREATE TABLE Orders (
     Shipping NUMERIC(10, 2),
     Total NUMERIC(10, 2)
 );
- 
+
+CREATE TABLE OrderItem (
+    OrderID INT,
+    bookID INT REFERENCES Books(bookID),
+    Quantity INT,
+    Price NUMERIC(10, 2),
+    PRIMARY KEY (OrderID, bookID)
+);
+
 
