@@ -1,5 +1,5 @@
 
-INSERT INTO Books (bookID, AuthorID, PublisherID, Title, ISBN, Genre, Type, PublicationYear, Price, Condition)
+INSERT INTO Book (bookID, AuthorID, PublisherID, Title, ISBN, Genre, Type, PublicationYear, Price, Condition)
 VALUES 
 (1, 1, 1, 'Title 1', 'ISBN1', 'Genre 1', 'Fiction', 2001, 10.23, 'New'),
 (2, 2, 2, 'Title 2', 'ISBN2', 'Genre 2', 'Non-Fiction', 2002, 20.46, 'Used'),
@@ -12,7 +12,7 @@ VALUES
 (9, 9, 9, 'Title 9', 'ISBN9', 'Genre 4', 'Fiction', 2009, 90.07, 'Used'),
 (10, 10, 10, 'Title 10', 'ISBN10', 'Genre 5', 'Non-Fiction', 2010, 100.30, 'New');
 
-INSERT INTO Publishers (publisherID, Country, bookID)
+INSERT INTO Publisher (publisherID, Country, bookID)
 VALUES 
 (1, 'USA', 1),
 (2, 'India', 2),
@@ -25,7 +25,7 @@ VALUES
 (9, 'UK', 9),
 (10, 'USA', 10);
  
-INSERT INTO Authors (AuthorID, firstName, lastName, bookID)
+INSERT INTO Author (AuthorID, firstName, lastName, bookID)
 VALUES 
 (1, 'AuthorFirst1', 'AuthorLast1', 1),
 (2, 'AuthorFirst2', 'AuthorLast2', 2),
@@ -51,7 +51,7 @@ VALUES
 (9, 21, 16),
 (10, 17, 10);
 
-INSERT INTO Customers (customerID, firstName, lastName, streetNumber, streetName, postalCode, State, Country, phoneNumber)
+INSERT INTO Customer (customerID, firstName, lastName, streetNumber, streetName, postalCode, State, Country, phoneNumber)
 VALUES 
 (1, 'FirstName1', 'LastName1', 101, 'Street1', 'PIN101', 'Assam', 'India', '+911234567890'),
 (2, 'FirstName2', 'LastName2', 102, 'Street2', 'PIN102', 'Gujarat', 'India', '+911234567891'),
@@ -64,7 +64,7 @@ VALUES
 (9, 'FirstName9', 'LastName9', 109, 'Street9', 'PIN109', 'Karnataka', 'India', '+911234567898'),
 (10, 'FirstName10', 'LastName10', 110, 'Street10', 'PIN110', 'Kerala', 'India', '+911234567899');
 
-INSERT INTO Orders (orderID, customerID, orderDate, Subtotal, Shipping, Total)
+INSERT INTO Order (orderID, customerID, orderDate, Subtotal, Shipping, Total)
 VALUES 
 (1, 1, '2025-01-01', 50.00, 5.00, 55.00),
 (2, 2, '2025-01-02', 60.00, 6.00, 66.00),
