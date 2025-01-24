@@ -1,7 +1,7 @@
-delete from Books;
-delete from Publishers;
-delete from Authors;
+delete from Book;
+delete from Publisher;
+delete from Author;
 delete from Inventory;
-delete from Customers;
-delete from Orders;
+delete from Customer;
+delete from Order;
 delete from OrderItem;
