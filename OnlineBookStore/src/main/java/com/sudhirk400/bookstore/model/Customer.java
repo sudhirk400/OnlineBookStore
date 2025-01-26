@@ -16,7 +16,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for customerID
-    @Column(name = "customerID", nullable = false)
+    @Column(name = "customerID", nullable = false, insertable = false, updatable = false)
     private Integer customerID;
 
     @Column(name = "firstName", nullable = false)

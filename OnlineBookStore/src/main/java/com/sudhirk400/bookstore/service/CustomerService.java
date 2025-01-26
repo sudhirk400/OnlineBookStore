@@ -1,11 +1,13 @@
 package com.sudhirk400.bookstore.service;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sudhirk400.bookstore.dto.CustomerRecord;
 import com.sudhirk400.bookstore.model.Customer;
 import com.sudhirk400.bookstore.repository.CustomerRepository;
-
-import java.util.List;
 
 @Service
 public class CustomerService {
@@ -13,19 +15,70 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+    public List<CustomerRecord> getAllCustomers() {
+    	List<Customer> customers = customerRepository.findAll();
+        return customers.stream()
+                .map(customer -> new CustomerRecord(customer)).collect(Collectors.toList());
     }
+    
+    public CustomerRecord getCustomerById(Integer id) {
+    	Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+    	return new CustomerRecord(customer);
+    }
+    
+    public CustomerRecord addCustomer(Customer customer) {
+  	
+    	Customer savedCustomer =  customerRepository.save(customer);
+    	return new CustomerRecord(savedCustomer);
+    } 
+    
+    public CustomerRecord updateCustomer(Customer customerToUpdate) {
+      	
+    	Customer  customer = customerRepository.findById(customerToUpdate.getCustomerID()).get();
+		// Update fields
+		if (customerToUpdate.getFirstName() != null && 
+				!customerToUpdate.getFirstName().isEmpty()) {
+			customer.setFirstName(customerToUpdate.getFirstName());
+		}
+		if (customerToUpdate.getLastName() != null && 
+				!customerToUpdate.getLastName().isEmpty()) {
+			customer.setLastName(customerToUpdate.getLastName());
+		}
+		if (customerToUpdate.getStreetNumber() != null && 
+				(customerToUpdate.getStreetNumber() > 0 )) {
+			customer.setStreetNumber(customerToUpdate.getStreetNumber());
+		}			
+		
+		if (customerToUpdate.getStreetName() != null && 
+				!customerToUpdate.getStreetName().isEmpty()) {
+			customer.setStreetName(customerToUpdate.getStreetName());
+		}
+		if (customerToUpdate.getPostalCode() != null && 
+				!customerToUpdate.getPostalCode().isEmpty()) {
+			customer.setPostalCode(customerToUpdate.getPostalCode());
+		}	
+				
+		if (customerToUpdate.getState() != null && 
+				!customerToUpdate.getState().isEmpty()) {
+			customer.setState(customerToUpdate.getState());
+		}
+		if (customerToUpdate.getCountry() != null && 
+				!customerToUpdate.getCountry().isEmpty()) {
+			customer.setCountry(customerToUpdate.getCountry());
+		}	
+		if (customerToUpdate.getPhoneNumber() != null && 
+				!customerToUpdate.getPhoneNumber().isEmpty()) {
+			customer.setPhoneNumber(customerToUpdate.getPhoneNumber());
+		}
 
-    public Customer getCustomerById(Integer id) {
-        return customerRepository.findById(id).orElse(null);
-    }
+    	Customer savedCustomer =  customerRepository.save(customer);
+    	return new CustomerRecord(savedCustomer);
+    } 
+    
 
-    public Customer saveCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
 
     public void deleteCustomerById(Integer id) {
         customerRepository.deleteById(id);
     }
+
 }

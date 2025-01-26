@@ -51,45 +51,45 @@ public class BookService {
     }
 
 	// Update an existing book
-	public BookRecord updateBook(Book updatedBook) {
-		Book book = bookRepository.findById(updatedBook.getBookID()).get();
+	public BookRecord updateBook(Book bookToUpdate) {
+		Book book = bookRepository.findById(bookToUpdate.getBookID()).get();
 		// Update fields
-		if (updatedBook.getTitle() != null && 
-				!updatedBook.getTitle().isEmpty()) {
-			book.setTitle(updatedBook.getTitle());
+		if (bookToUpdate.getTitle() != null && 
+				!bookToUpdate.getTitle().isEmpty()) {
+			book.setTitle(bookToUpdate.getTitle());
 		}
-		if (updatedBook.getIsbn() != null && 
-				!updatedBook.getIsbn().isEmpty()) {
-			book.setIsbn(updatedBook.getIsbn());
+		if (bookToUpdate.getIsbn() != null && 
+				!bookToUpdate.getIsbn().isEmpty()) {
+			book.setIsbn(bookToUpdate.getIsbn());
 		}
-		if (updatedBook.getGenre() != null && 
-				!updatedBook.getGenre().isEmpty()) {
-			book.setGenre(updatedBook.getGenre());
+		if (bookToUpdate.getGenre() != null && 
+				!bookToUpdate.getGenre().isEmpty()) {
+			book.setGenre(bookToUpdate.getGenre());
 		}
 		 
-		if (updatedBook.getType() != null && 
-				!updatedBook.getType().isEmpty()) {
-			book.setType(updatedBook.getType());
+		if (bookToUpdate.getType() != null && 
+				!bookToUpdate.getType().isEmpty()) {
+			book.setType(bookToUpdate.getType());
 		}	
 		
 		
-		if (updatedBook.getPublicationYear() != null && 
-				(updatedBook.getPublicationYear().intValue() > 0) ) {
-			book.setPublicationYear(updatedBook.getPublicationYear());
+		if (bookToUpdate.getPublicationYear() != null && 
+				(bookToUpdate.getPublicationYear().intValue() > 0) ) {
+			book.setPublicationYear(bookToUpdate.getPublicationYear());
 		}
-		if (updatedBook.getPrice() != null && 
-				(updatedBook.getPrice().intValue() > 0)) {
-			book.setPrice(updatedBook.getPrice());
+		if (bookToUpdate.getPrice() != null && 
+				(bookToUpdate.getPrice().intValue() > 0)) {
+			book.setPrice(bookToUpdate.getPrice());
 		}
-		if (updatedBook.getCondition() != null && 
-				!updatedBook.getCondition().isEmpty()) {
-			book.setCondition(updatedBook.getCondition());
+		if (bookToUpdate.getCondition() != null && 
+				!bookToUpdate.getCondition().isEmpty()) {
+			book.setCondition(bookToUpdate.getCondition());
 		}
-		if (updatedBook.getAuthor() != null ) {
-			book.setAuthor(updatedBook.getAuthor());
+		if (bookToUpdate.getAuthor() != null ) {
+			book.setAuthor(bookToUpdate.getAuthor());
 		}
-		if (updatedBook.getPublisher() != null ) {
-			book.setPublisher(updatedBook.getPublisher());
+		if (bookToUpdate.getPublisher() != null ) {
+			book.setPublisher(bookToUpdate.getPublisher());
 		}		
 		// Save updated book
 		Book modBook =  bookRepository.save(book);
