@@ -1,5 +1,5 @@
 CREATE TABLE Book (
-    bookID INT PRIMARY KEY,
+    bookID SERIAL INT PRIMARY KEY,
     AuthorID INT,
     PublisherID INT,
     Title TEXT,
@@ -12,13 +12,13 @@ CREATE TABLE Book (
 );
 
 CREATE TABLE Publisher (
-    publisherID INT PRIMARY KEY,
+    publisherID SERIAL INT PRIMARY KEY,
     Country TEXT,
     bookID INT REFERENCES Book(bookID)
 );
 
 CREATE TABLE Author (
-    AuthorID INT PRIMARY KEY,
+    AuthorID SERIAL INT PRIMARY KEY,
     firstName TEXT,
     lastName TEXT,
     bookID INT REFERENCES Book(bookID)
@@ -31,7 +31,7 @@ CREATE TABLE Inventory (
 );
 
 CREATE TABLE Customer (
-    customerID INT PRIMARY KEY,
+    customerID SERIAL INT PRIMARY KEY,
     firstName TEXT,
     lastName TEXT,
     streetNumber INT,
@@ -43,7 +43,7 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE Orders (
-    orderID INT PRIMARY KEY,
+    orderID SERIAL INT PRIMARY KEY,
     customerID INT REFERENCES Customer(customerID),
     orderDate DATE,
     Subtotal NUMERIC(10, 2),
