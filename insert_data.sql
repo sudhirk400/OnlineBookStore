@@ -64,7 +64,7 @@ VALUES
 (9, 'FirstName9', 'LastName9', 109, 'Street9', 'PIN109', 'Karnataka', 'India', '+911234567898'),
 (10, 'FirstName10', 'LastName10', 110, 'Street10', 'PIN110', 'Kerala', 'India', '+911234567899');
 
-INSERT INTO Order (orderID, customerID, orderDate, Subtotal, Shipping, Total)
+INSERT INTO Orders (orderID, customerID, orderDate, Subtotal, Shipping, Total)
 VALUES 
 (1, 1, '2025-01-01', 50.00, 5.00, 55.00),
 (2, 2, '2025-01-02', 60.00, 6.00, 66.00),
