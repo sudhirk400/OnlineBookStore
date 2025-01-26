@@ -13,7 +13,9 @@ public record BookRecord(
 		String genre,
 		String type,
 		Integer publicationYear,
-		BigDecimal price
+		BigDecimal price,
+		String condition
+		
 	) {
 	//constructor that maps from a Books entity
 	 public BookRecord(Book book) {
@@ -26,7 +28,8 @@ public record BookRecord(
 	            book.getGenre(),
 	            book.getType(),
 	            book.getPublicationYear(),
-	            book.getPrice()
+	            book.getPrice(),
+	            book.getCondition()
 	        );
 	    }	
 }

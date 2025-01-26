@@ -27,8 +27,9 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for bookID
-    @Column(name = "bookID", nullable = false)
+    @Column(name = "bookID", nullable = false, insertable = false, updatable = false)
     private Integer bookID;
+    
 
     @Column(name = "AuthorID", nullable = false, insertable = false, updatable = false)
     private Integer authorID;
@@ -64,7 +65,7 @@ public class Book {
     @Column(name = "Price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "Condition", nullable = false)
+    @Column(name = "Condition", nullable = true)
     private String condition;
 }
 

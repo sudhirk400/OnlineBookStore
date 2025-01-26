@@ -20,6 +20,7 @@ import com.sudhirk400.bookstore.model.Book;
 import com.sudhirk400.bookstore.service.BookService;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 
 //import jakarta.annotation.security.RolesAllowed;
 
@@ -27,45 +28,50 @@ import jakarta.annotation.security.RolesAllowed;
  * 
  */
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/api/book/")
 public class BookController {
 
 	private final BookService bookService;
 
-	@Autowired
+	//@Autowired
 	public BookController(BookService bookService) {
 		this.bookService = bookService;
 	}
 
-	@GetMapping
+	@GetMapping("getAll")
 	@RolesAllowed({"Admin","Customer"})
-	public List<Book> getAllBooks() {
+	public List<BookRecord> getAllBooks() {
 		return bookService.getAllBooks();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	@RolesAllowed({"Admin","Customer"})
 	//@RolesAllowed("Customer")
 	public BookRecord getBookById(@PathVariable Integer id) {
 		return bookService.getBookById(id);
 	}
+	
+	@PostMapping("create")
+	public BookRecord addBook(@Valid @RequestBody Book book) {
+		BookRecord bookRecord = bookService.addBook(book);
+		
+		return bookRecord;
+	}	
 
-	@PostMapping 
+
+	@PutMapping("update")
 	//@RolesAllowed("Admin")
-	public Book saveBook(@RequestBody Book book) {
-		return bookService.saveBook(book);
+	public BookRecord updateBook(@Valid @RequestBody Book book) {
+		BookRecord bookRecord = bookService.updateBook(book);
+		
+		return bookRecord;
 	}
 
-	@PutMapping("/{id}")
+	@DeleteMapping("delete/{id}")
 	//@RolesAllowed("Admin")
-	public Book updateBook(@PathVariable Integer id, @RequestBody Book book) {
-		return bookService.updateBook(id, book);
-	}
-
-	@DeleteMapping("/{id}")
-	//@RolesAllowed("Admin")
-	public void deleteBook(@PathVariable Integer id) {
+	public String deleteBook(@PathVariable Integer id) {
 		bookService.deleteBookById(id);
+		return "Book is deleted successfully!";
 	}
 
 }
