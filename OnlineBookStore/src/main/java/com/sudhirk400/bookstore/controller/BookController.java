@@ -79,5 +79,11 @@ public class BookController {
 	{
 		return bookService.getBookByTitle(title);
 	}
+	
+	@GetMapping("getByTitleAndCondition/{title}/{condition}")
+	public BookRecord getBookByTitle(@PathVariable String title, @PathVariable String condition) 
+	{
+		return bookService.getBookByTitleAndCondition(title, condition);
+	}	
 
 }

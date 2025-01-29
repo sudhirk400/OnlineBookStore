@@ -108,5 +108,13 @@ public class BookService {
                 .map(book -> new BookRecord(book)).collect(Collectors.toList());    	
     }
 
+    public BookRecord getBookByTitleAndCondition(String title, String condition)
+    {
+    	Book book = bookRepository.findByTitleAndCondition(title, condition);
+    	return  new BookRecord(book);
+    }
+    
+    
+    
 }
 
