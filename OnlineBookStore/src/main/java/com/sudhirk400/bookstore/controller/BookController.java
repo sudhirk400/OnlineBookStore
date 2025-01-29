@@ -73,5 +73,11 @@ public class BookController {
 		bookService.deleteBookById(id);
 		return "Book is deleted successfully!";
 	}
+	
+	@GetMapping("getByTitle/{title}")
+	public List<BookRecord> getBookByTitle(@PathVariable String title) 
+	{
+		return bookService.getBookByTitle(title);
+	}
 
 }

@@ -100,6 +100,13 @@ public class BookService {
         bookRepository.deleteById(id);
     }
     
+    
+    public List<BookRecord> getBookByTitle(String title)
+    {
+    	List<Book> books = bookRepository.findByTitle(title);
+        return books.stream()
+                .map(book -> new BookRecord(book)).collect(Collectors.toList());    	
+    }
 
 }
 
