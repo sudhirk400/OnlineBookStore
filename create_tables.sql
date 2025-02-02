@@ -8,7 +8,7 @@ CREATE TABLE Book (
     Type TEXT NOT NULL,
     PublicationYear INT CHECK (PublicationYear > 0),
     Price NUMERIC(10, 2) CHECK (Price >= 0),
-    Condition TEXT CHECK (Condition IN ('New', 'Used'))
+    Quantity INT)
 );
 
 CREATE TABLE Publisher (
