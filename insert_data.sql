@@ -1,16 +1,16 @@
 
-INSERT INTO Book (bookID, AuthorID, PublisherID, Title, ISBN, Genre, Type, PublicationYear, Price, Condition)
+INSERT INTO Book (bookID, AuthorID, PublisherID, Title, ISBN, Genre, Type, PublicationYear, Price, Quantity)
 VALUES 
-(1, 1, 1, 'Title 1', 'ISBN1', 'Genre 1', 'Fiction', 2001, 10.23, 'New'),
-(2, 2, 2, 'Title 2', 'ISBN2', 'Genre 2', 'Non-Fiction', 2002, 20.46, 'Used'),
-(3, 3, 3, 'Title 3', 'ISBN3', 'Genre 3', 'Fiction', 2003, 30.69, 'Used'),
-(4, 4, 4, 'Title 4', 'ISBN4', 'Genre 4', 'Non-Fiction', 2004, 40.92, 'New'),
-(5, 5, 5, 'Title 5', 'ISBN5', 'Genre 5', 'Fiction', 2005, 50.15, 'Used'),
-(6, 6, 6, 'Title 6', 'ISBN6', 'Genre 1', 'Non-Fiction', 2006, 60.38, 'New'),
-(7, 7, 7, 'Title 7', 'ISBN7', 'Genre 2', 'Fiction', 2007, 70.61, 'Used'),
-(8, 8, 8, 'Title 8', 'ISBN8', 'Genre 3', 'Non-Fiction', 2008, 80.84, 'New'),
-(9, 9, 9, 'Title 9', 'ISBN9', 'Genre 4', 'Fiction', 2009, 90.07, 'Used'),
-(10, 10, 10, 'Title 10', 'ISBN10', 'Genre 5', 'Non-Fiction', 2010, 100.30, 'New');
+(1, 1, 1, 'Title 1', 'ISBN1', 'Genre 1', 'Fiction', 2001, 10.23, 5),
+(2, 2, 2, 'Title 2', 'ISBN2', 'Genre 2', 'Non-Fiction', 2002, 20.46, 100'),
+(3, 3, 3, 'Title 3', 'ISBN3', 'Genre 3', 'Fiction', 2003, 30.69, 2),
+(4, 4, 4, 'Title 4', 'ISBN4', 'Genre 4', 'Non-Fiction', 2004, 40.92, 50),
+(5, 5, 5, 'Title 5', 'ISBN5', 'Genre 5', 'Fiction', 2005, 50.15, 100),
+(6, 6, 6, 'Title 6', 'ISBN6', 'Genre 1', 'Non-Fiction', 2006, 60.38, 101),
+(7, 7, 7, 'Title 7', 'ISBN7', 'Genre 2', 'Fiction', 2007, 70.61, 21),
+(8, 8, 8, 'Title 8', 'ISBN8', 'Genre 3', 'Non-Fiction', 2008, 80.84, 11),
+(9, 9, 9, 'Title 9', 'ISBN9', 'Genre 4', 'Fiction', 2009, 90.07, 12),
+(10, 10, 10, 'Title 10', 'ISBN10', 'Genre 5', 'Non-Fiction', 2010, 100.30, 1);
 
 INSERT INTO Publisher (publisherID, Country, bookID)
 VALUES 
