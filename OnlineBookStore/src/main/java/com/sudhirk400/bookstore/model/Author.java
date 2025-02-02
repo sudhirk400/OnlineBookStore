@@ -21,6 +21,7 @@ import lombok.Setter;
 @Table(name = "Author")
 public class Author {
 
+    /** The author ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for AuthorID
     @Column(name = "AuthorID", nullable = false)

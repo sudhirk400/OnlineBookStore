@@ -28,6 +28,11 @@ public class OrderController {
 
 	private final OrderService orderService;
 
+	/**
+	 * Instantiates a new order controller.
+	 *
+	 * @param orderService the order service
+	 */
 	@Autowired
 	public OrderController(OrderService orderService) {
 		this.orderService = orderService;

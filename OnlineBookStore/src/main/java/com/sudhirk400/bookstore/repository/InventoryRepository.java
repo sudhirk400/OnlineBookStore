@@ -4,5 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sudhirk400.bookstore.model.Inventory;
 
+/**
+ * The Interface InventoryRepository.
+ */
 public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
 }

@@ -2,7 +2,7 @@ package com.sudhirk400.bookstore.dto;
 
 import com.sudhirk400.bookstore.model.Customer;
 
-import lombok.AllArgsConstructor;
+ 
 
 public record CustomerRecord(
 		Integer customerID,
@@ -17,6 +17,12 @@ public record CustomerRecord(
 				
 		
 	) {
+	
+	/**
+	 * Instantiates a new customer record.
+	 *
+	 * @param customer the customer
+	 */
 	//constructor that maps from a Customer entity
 	 public CustomerRecord(Customer customer) {
 	        this(

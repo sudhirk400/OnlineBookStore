@@ -9,29 +9,57 @@ import com.sudhirk400.bookstore.dto.CustomerRecord;
 import com.sudhirk400.bookstore.model.Customer;
 import com.sudhirk400.bookstore.repository.CustomerRepository;
 
+ 
+/**
+ * The Class CustomerService.
+ */
 @Service
 public class CustomerService {
 
+    /** The customer repository. */
     @Autowired
     private CustomerRepository customerRepository;
 
+    /**
+     * Gets the all customers.
+     *
+     * @return the all customers
+     */
     public List<CustomerRecord> getAllCustomers() {
     	List<Customer> customers = customerRepository.findAll();
         return customers.stream()
                 .map(customer -> new CustomerRecord(customer)).collect(Collectors.toList());
     }
     
+    /**
+     * Gets the customer by id.
+     *
+     * @param id the id
+     * @return the customer by id
+     */
     public CustomerRecord getCustomerById(Integer id) {
     	Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
     	return new CustomerRecord(customer);
     }
     
+    /**
+     * Adds the customer.
+     *
+     * @param customer the customer
+     * @return the customer record
+     */
     public CustomerRecord addCustomer(Customer customer) {
   	
     	Customer savedCustomer =  customerRepository.save(customer);
     	return new CustomerRecord(savedCustomer);
     } 
     
+    /**
+     * Update customer.
+     *
+     * @param customerToUpdate the customer to update
+     * @return the customer record
+     */
     public CustomerRecord updateCustomer(Customer customerToUpdate) {
       	
     	Customer  customer = customerRepository.findById(customerToUpdate.getCustomerID()).get();
@@ -77,6 +105,11 @@ public class CustomerService {
     
 
 
+    /**
+     * Delete customer by id.
+     *
+     * @param id the id
+     */
     public void deleteCustomerById(Integer id) {
         customerRepository.deleteById(id);
     }

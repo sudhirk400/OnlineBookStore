@@ -5,5 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.sudhirk400.bookstore.model.OrderItem;
 import com.sudhirk400.bookstore.model.OrderItemKey;
 
+/**
+ * The Interface OrderItemRepository.
+ */
 public interface OrderItemRepository extends JpaRepository<OrderItem, OrderItemKey> {
 }

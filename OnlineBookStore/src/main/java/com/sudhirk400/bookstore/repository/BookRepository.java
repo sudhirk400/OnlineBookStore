@@ -8,5 +8,13 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 	List<Book> findByTitle(String title);
-	Book findByTitleAndCondition(String title, String condition);
+	
+	/**
+	 * Find by title and genre.
+	 *
+	 * @param title the title
+	 * @param genre the genre
+	 * @return the book
+	 */
+	Book findByTitleAndGenre(String title, String genre);
 }

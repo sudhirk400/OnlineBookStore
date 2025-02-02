@@ -25,6 +25,7 @@ import lombok.Setter;
 @Table(name = "Book")
 public class Book {
 
+    /** The book ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for bookID
     @Column(name = "bookID", nullable = false, insertable = false, updatable = false)
@@ -65,8 +66,8 @@ public class Book {
     @Column(name = "Price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "Condition", nullable = true)
-    private String condition;
+    @Column(name = "Quantity", nullable = true)
+    private Integer quantity;
 }
 
  

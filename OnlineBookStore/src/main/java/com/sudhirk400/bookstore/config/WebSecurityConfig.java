@@ -25,21 +25,41 @@ public class WebSecurityConfig {
         return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
     }
 
+    /**
+     * Filter chain.
+     *
+     * @param http the http
+     * @return the security filter chain
+     * @throws Exception the exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         /* any endpoint that does not require a specific role (is not having @RolesAllowed annotation)
          can be accessed only by authenticated user */
+    	/*
         http.authorizeHttpRequests()
                 .anyRequest()
                 .authenticated();
+        */
+        http.authorizeRequests(authorize -> authorize
+                .anyRequest().authenticated() // Any request must be authenticated
+        );    	
 
-        // add configuration of authorization based on roles to oauth2ResourceServer
-        http.oauth2ResourceServer()
-                .jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
+        // Configure OAuth2 Resource Server with JWT
+        http.oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(jwt -> jwt
+                        .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                )
+        );
+        
+// 		  add configuration of authorization based on roles to oauth2ResourceServer
+//        http.oauth2ResourceServer()
+//                .jwt()
+//                .jwtAuthenticationConverter(jwtAuthenticationConverter());
 
         return http.build();
     }
+    
 
     private JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();

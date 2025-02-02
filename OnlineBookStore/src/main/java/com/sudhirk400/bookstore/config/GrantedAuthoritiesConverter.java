@@ -18,6 +18,12 @@ import java.util.stream.Collectors;
  */
 public class GrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
+    /**
+     * Convert.
+     *
+     * @param source the source
+     * @return the collection
+     */
     @Override
     public Collection<GrantedAuthority> convert(Jwt source) {
         Map<String, Object> realmAccess = source.getClaimAsMap("realm_access");
