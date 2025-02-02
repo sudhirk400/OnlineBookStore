@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import com.sudhirk400.bookstore.model.Book;
 
  
+ 
+ 
 /**
  * The Record BookRecord.
  *
@@ -19,6 +21,7 @@ import com.sudhirk400.bookstore.model.Book;
  * @param price the price
  * @param quantity the quantity
  */
+ 
 public record BookRecord(
 		Integer bookID,
 		Integer authorID,
@@ -53,4 +56,23 @@ public record BookRecord(
 	            book.getQuantity()
 	        );
 	    }	
+	 
+	    /**
+    	 * Gets the book ID.
+    	 *
+    	 * @return the book ID
+    	 */
+    	public Integer getBookID() {
+	        return bookID;
+	    }	
+    	
+    	/**
+	     * Gets the price.
+	     *
+	     * @return the price
+	     */
+	    public BigDecimal getPrice() {
+			return price;
+
+		}
 }

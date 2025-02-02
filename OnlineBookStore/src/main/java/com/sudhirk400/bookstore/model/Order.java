@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
  
 /**
@@ -33,7 +34,7 @@ public class Order {
 
     /** The order date. */
     @Column(name = "orderDate", nullable = false)
-    private LocalDate orderDate;
+    private Date orderDate;
 
     /** The subtotal. */
     @Column(name = "Subtotal", precision = 10, scale = 2, nullable = false)
