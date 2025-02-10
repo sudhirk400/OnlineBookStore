@@ -1,33 +1,44 @@
 package com.sudhirk400.bookstore.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
- 
 /**
  * The Class OrderItem.
  */
-@Setter
-@Getter
+@Data
 @Entity
-@Table(name = "OrderItem")
+@Table(name = "order_item")
 public class OrderItem {
 
-    /** The id. */
-    @EmbeddedId
-    private OrderItemKey id; // Composite primary key
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_item_id", nullable = false)
+	private Long id;
 
-    /** The quantity. */
-    @Column(name = "Quantity", nullable = false)
-    private Integer quantity;
+	/** The order. */
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
 
-    /** The price. */
-    @Column(name = "Price", precision = 10, scale = 2, nullable = false)
-    private BigDecimal price;
+	/** The book. */
+	@OneToOne
+	@JoinColumn(name = "book_id")
+	private Book book;
 
+	/** The quantity. */
+	@Column(name = "quantity", nullable = false)
+	private Integer quantity;
 
 }
-

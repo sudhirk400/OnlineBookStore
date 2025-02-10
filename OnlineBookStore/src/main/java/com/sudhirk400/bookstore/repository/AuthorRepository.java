@@ -9,4 +9,3 @@ import com.sudhirk400.bookstore.model.Author;
  */
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 }
-

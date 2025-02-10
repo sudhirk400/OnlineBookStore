@@ -1,57 +1,42 @@
 package com.sudhirk400.bookstore.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import com.sudhirk400.bookstore.dto.BookRecord;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-// TODO: Auto-generated Javadoc
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
+
 /**
  * The Class Cart.
  */
+@Entity
+@Data
+@Table(name = "carts")
 public class Cart {
 
-    /** The items. */
-    private Map<Integer, CartItem> items = new HashMap<>(); // Key: bookID, Value: CartItem
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cart_id", nullable = false)
+	private Long cartId;
 
-    /**
-     * Adds the item.
-     *
-     * @param book the book
-     * @param quantity the quantity
-     */
-    public void addItem(BookRecord book, int quantity) {
-        items.putIfAbsent(book.getBookID(), new CartItem(book, quantity));
-    }
+	/** The customer. */
+	@OneToOne
+	@JoinColumn(name = "customer_id", nullable = false)
+	private Customer customer;
 
-    /**
-     * Update item.
-     *
-     * @param bookID the book ID
-     * @param quantity the quantity
-     */
-    public void updateItem(int bookID, int quantity) {
-        if (items.containsKey(bookID)) {
-            items.get(bookID).setQuantity(quantity);
-        }
-    }
+	/** The cart items. */
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CartItem> cartItems;
 
-    /**
-     * Removes the item.
-     *
-     * @param bookID the book ID
-     */
-    public void removeItem(int bookID) {
-        items.remove(bookID);
-    }
-
-    /**
-     * Gets the items.
-     *
-     * @return the items
-     */
-    public Map<Integer, CartItem> getItems() {
-        return items;
-    }
 }
-

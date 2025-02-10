@@ -5,39 +5,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+/**
+ * The Class Author.
+ */
+@Data
 @Entity
-@Table(name = "Author")
+@Table(name = "author")
 public class Author {
 
-    /** The author ID. */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for AuthorID
-    @Column(name = "AuthorID", nullable = false)
-    private Integer authorID;
+	/** The author ID. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "author_id", nullable = false)
+	private Integer authorID;
 
-    @Column(name = "firstName", nullable = false)
-    private String firstName;
+	/** The name. */
+	@Column(name = "name", nullable = false)
+	private String name;
 
-    @Column(name = "lastName", nullable = false)
-    private String lastName;
-
-    @Column(name = "bookID", nullable = false, insertable = false, updatable = false)
-    private Integer bookID;
-
-    @ManyToOne
-    @JoinColumn(name = "bookID", referencedColumnName = "bookID")
-    private Book book;
+	/** The biography. */
+	@Column(name = "biography", nullable = true)
+	private String biography;
 
 }

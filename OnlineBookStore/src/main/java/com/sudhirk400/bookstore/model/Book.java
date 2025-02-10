@@ -1,71 +1,69 @@
 package com.sudhirk400.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Data;
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+/**
+ * The Class Book.
+ */
 @Data
 @Entity
-@Table(name = "Book")
+@Table(name = "books")
 public class Book {
 
-    /** The book ID. */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for bookID
-    @Column(name = "bookID", nullable = false, insertable = false, updatable = false)
-    private Integer bookID;
-    
+	/** The book ID. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "book_id", nullable = false)
+	private Integer bookID;
 
-    @Column(name = "AuthorID", nullable = false, insertable = false, updatable = false)
-    private Integer authorID;
+	/** The author ID. */
+	@Column(name = "author_id", nullable = false, insertable = false, updatable = false)
+	private Integer authorID;
 
-    @ManyToOne
-    @JoinColumn(name = "AuthorID", referencedColumnName = "AuthorID")
-    @JsonIgnore
-    private Author author;
+	/** The author. */
+	@ManyToOne
+	@JoinColumn(name = "author_id", referencedColumnName = "author_id")
+	@JsonIgnore
+	private Author author;
 
-    @Column(name = "PublisherID", nullable = false, insertable = false, updatable = false)
-    private Integer publisherID;
+	/** The publisher ID. */
+	@Column(name = "publisher_id", nullable = false, insertable = false, updatable = false)
+	private Integer publisherID;
 
-    @ManyToOne
-    @JoinColumn(name = "PublisherID", referencedColumnName = "publisherID")
-    @JsonIgnore
-    private Publisher publisher;
+	/** The publisher. */
+	@ManyToOne
+	@JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
+	@JsonIgnore
+	private Publisher publisher;
 
-    @Column(name = "Title", nullable = false)
-    private String title;
+	/** The title. */
+	@Column(name = "title", nullable = false)
+	private String title;
 
-    @Column(name = "ISBN", nullable = false, unique = true)
-    private String isbn;
+	/** The isbn. */
+	@Column(name = "isbn", nullable = false, unique = true)
+	private String isbn;
 
-    @Column(name = "Genre", nullable = false)
-    private String genre;
+	/** The genre. */
+	@Column(name = "genre", nullable = false)
+	private String genre;
 
-    @Column(name = "Type", nullable = false)
-    private String type;
+	/** The type. */
+	@Column(name = "type", nullable = false)
+	private String type;
 
-    @Column(name = "PublicationYear", nullable = false)
-    private Integer publicationYear;
+	/** The publication year. */
+	@Column(name = "publisher_year", nullable = false)
+	private Integer publicationYear;
 
-    @Column(name = "Price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+	/** The price. */
+	@Column(name = "price", nullable = false, precision = 10, scale = 2)
+	private BigDecimal price;
 
-    @Column(name = "Quantity", nullable = true)
-    private Integer quantity;
+	/** The quantity. */
+	@Column(name = "quantity", nullable = true)
+	private Integer quantity;
 }
-
- 

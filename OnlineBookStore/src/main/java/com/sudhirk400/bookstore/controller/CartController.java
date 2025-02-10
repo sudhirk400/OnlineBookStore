@@ -1,70 +1,85 @@
 package com.sudhirk400.bookstore.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import com.sudhirk400.bookstore.dto.BookRecord;
 import com.sudhirk400.bookstore.model.Cart;
-import com.sudhirk400.bookstore.service.BookService;
-import com.sudhirk400.bookstore.service.OrderService;
+import com.sudhirk400.bookstore.service.CartService;
 
-import jakarta.servlet.http.HttpSession;
-
+/**
+ * The Class CartController.
+ */
 @RestController
-@RequestMapping("/cart")
-@SessionAttributes("cart")
+@RequestMapping("/api/carts")
 public class CartController {
-	
-	private final OrderService orderService;
-	
-	private final BookService bookService;
-	
-	public CartController() {
-		this.orderService = new OrderService();
-		this.bookService = new BookService();
-		
-		// TODO Auto-generated constructor stub
+
+	/** The cart service. */
+	@Autowired
+	private CartService cartService;
+
+	/**
+	 * Adds the to cart.
+	 *
+	 * @param email the email
+	 * @param bookId the book id
+	 * @param quantity the quantity
+	 * @return the cart
+	 */
+	@PostMapping
+	public Cart addToCart(@RequestParam String email, @RequestParam Long bookId,
+			@RequestParam Integer quantity) {
+		Cart cart = cartService.addToCart(email, bookId, quantity);
+		return cart;
 	}
 
+	/**
+	 * View cart.
+	 *
+	 * @param email the email
+	 * @return the cart
+	 */
+	@GetMapping
+	public Cart viewCart(@RequestParam String email) {
+		Cart cart = cartService.viewCart(email);
+		return cart;
+	}
 
-    @ModelAttribute("cart")
-    public Cart getCart() {
-        return new Cart();
-    }
+	/**
+	 * Update cart item.
+	 *
+	 * @param cartItemId the cart item id
+	 * @param quantity the quantity
+	 * @return the response entity
+	 */
+	@PutMapping
+	public ResponseEntity<Void> updateCartItem(@RequestParam Long cartItemId,
+			@RequestParam Integer quantity) {
+		cartService.updateCartItem(cartItemId, quantity);
+		return ResponseEntity.ok().build();
+	}
 
-    @PostMapping("/add/{bookID}")
-    public String addToCart(@PathVariable int bookID, @RequestParam int quantity, 
-                            @ModelAttribute("cart") Cart cart) {
-        BookRecord book = bookService.getBookById(bookID); // Simulate fetching from DB
-        if (book != null) {
-            cart.addItem(book, quantity);
-        }
-        return "Book added to cart";
-    }
+	/**
+	 * Removes the cart item.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> removeCartItem(@PathVariable Long id) {
+		cartService.removeCartItem(id);
+		return ResponseEntity.ok().build();
+	}
 
-    @GetMapping
-    public Cart viewCart(@ModelAttribute("cart") Cart cart) {
-        return cart;
-    }
-
- 
-    
-    @PostMapping("/checkout")
-    public String  checkout(@ModelAttribute("cart") Cart cart, 
-                                           @RequestParam int customerID, 
-                                           HttpSession session) {
-        try {
-            orderService.createOrderFromCart(cart, customerID);
-            session.removeAttribute("cart"); // Clear cart after checkout
-            return "Order placed successfully!";
-        } catch (RuntimeException e) {
-            return  e.getMessage() ;
-        }
-    }    
+	/**
+	 * Checkout.
+	 *
+	 * @param email the email
+	 * @return the response entity
+	 */
+	@PostMapping("/checkout")
+	public ResponseEntity<Void> checkout(@RequestParam String email) {
+		cartService.checkout(email);
+		return ResponseEntity.ok().build();
+	}
 }

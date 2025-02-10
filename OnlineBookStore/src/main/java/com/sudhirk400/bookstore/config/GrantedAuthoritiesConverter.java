@@ -12,34 +12,37 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * By default, authorization is made through scope claims from the JWT Access Token.
- * In order to authorize users by roles, we override the default configuration by implementing
- * a custom converter.
+ * By default, authorization is made through scope claims from the JWT Access
+ * Token. In order to authorize users by roles, we override the default
+ * configuration by implementing a custom converter.
  */
-public class GrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+public class GrantedAuthoritiesConverter
+		implements
+			Converter<Jwt, Collection<GrantedAuthority>> {
 
-    /**
-     * Convert.
-     *
-     * @param source the source
-     * @return the collection
-     */
-    @Override
-    public Collection<GrantedAuthority> convert(Jwt source) {
-        Map<String, Object> realmAccess = source.getClaimAsMap("realm_access");
+	/**
+	 * Convert.
+	 *
+	 * @param source
+	 *            the source
+	 * @return the collection
+	 */
+	@Override
+	public Collection<GrantedAuthority> convert(Jwt source) {
+		Map<String, Object> realmAccess = source.getClaimAsMap("realm_access");
 
-        if (Objects.nonNull(realmAccess)) {
-            List<String> roles = (List<String>) realmAccess.get("roles");
+		if (Objects.nonNull(realmAccess)) {
+			List<String> roles = (List<String>) realmAccess.get("roles");
 
-            if (Objects.nonNull(roles)) {
-                return roles.stream()
-                        .map(rn -> new SimpleGrantedAuthority("ROLE_" + rn))
-                        .collect(Collectors.toList());
-            }
+			if (Objects.nonNull(roles)) {
+				return roles.stream()
+						.map(rn -> new SimpleGrantedAuthority("ROLE_" + rn))
+						.collect(Collectors.toList());
+			}
 
-        }
+		}
 
-        return List.of();
-    }
+		return List.of();
+	}
 
 }

@@ -5,16 +5,33 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.sudhirk400.bookstore.model.Book;
 import java.util.List;
 
-
-public interface BookRepository extends JpaRepository<Book, Integer> {
-	List<Book> findByTitle(String title);
+/**
+ * The Interface BookRepository.
+ */
+public interface BookRepository extends JpaRepository<Book, Long> {
 	
 	/**
-	 * Find by title and genre.
+	 * Find by title containing ignore case.
 	 *
 	 * @param title the title
-	 * @param genre the genre
-	 * @return the book
+	 * @return the list
 	 */
-	Book findByTitleAndGenre(String title, String genre);
+	List<Book> findByTitleContainingIgnoreCase(String title);
+
+	/**
+	 * Find by genre containing ignore case.
+	 *
+	 * @param genre the genre
+	 * @return the list
+	 */
+	List<Book> findByGenreContainingIgnoreCase(String genre);
+
+	/**
+	 * Find by price between.
+	 *
+	 * @param minPrice the min price
+	 * @param maxPrice the max price
+	 * @return the list
+	 */
+	List<Book> findByPriceBetween(Double minPrice, Double maxPrice);
 }

@@ -2,6 +2,7 @@ package com.sudhirk400.bookstore.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,45 +10,42 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
- 
+
 /**
  * The Class Order.
  */
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
-@Table(name = "Orders")
+@Table(name = "order")
 public class Order {
 
-    /** The Order ID. */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment is enabled for orderID
-    @Column(name = "orderID", nullable = false)
-    private Integer OrderID;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_id", nullable = false)
+	private Long id;
 
-    /** The customer ID. */
-    @Column(name = "customerID", nullable = false)
-    private Integer customerID;
+	/** The customer. */
+	@OneToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 
-    /** The order date. */
-    @Column(name = "orderDate", nullable = false)
-    private Date orderDate;
+	/** The order items. */
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<OrderItem> orderItems;
 
-    /** The subtotal. */
-    @Column(name = "Subtotal", precision = 10, scale = 2, nullable = false)
-    private BigDecimal subtotal;
+	/** The order date. */
+	@Column(name = "order_date", nullable = false)
+	private Date orderDate;
 
-    /** The shipping. */
-    @Column(name = "Shipping", precision = 10, scale = 2, nullable = false)
-    private BigDecimal shipping;
+	/** The status. */
+	@Column(name = "status", nullable = false)
+	private String status;
 
-    /** The total. */
-    @Column(name = "Total", precision = 10, scale = 2, nullable = false)
-    private BigDecimal total;
-
+	/** The total. */
+	@Column(name = "total", precision = 10, scale = 2, nullable = false)
+	private BigDecimal total;
 
 }
-

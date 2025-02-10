@@ -5,47 +5,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
- 
 /**
  * The Class Publisher.
  */
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
-@Table(name = "Publisher")
+@Table(name = "publisher")
 public class Publisher {
 
-    /** The publisher ID. */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assumes auto-increment for publisherID
-    @Column(name = "publisherID", nullable = false)
-    private Integer publisherID;
+	/** The publisher ID. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "publisher_id", nullable = false)
+	private Integer publisherID;
 
-    /** The country. */
-    @Column(name = "Country", nullable = false)
-    private String country;
+	/** The country. */
+	@Column(name = "name", nullable = false)
+	private String name;
 
-    /** The book ID. */
-    @Column(name = "bookID", nullable = false, insertable = false, updatable = false)
-    private Integer bookID;
+	/** The biography. */
+	@Column(name = "biography", nullable = true)
+	private String biography;
 
-    /** The book. */
-    @ManyToOne
-    @JoinColumn(name = "bookID", referencedColumnName = "bookID")
-    private Book book;
- 
+	/** The country. */
+	@Column(name = "country", nullable = false)
+	private String country;
+
 }
-
-
- 
-
